@@ -1,0 +1,8 @@
+*.exe
+*.log
+
+*.txt
+
+Venv/
+
+*/
