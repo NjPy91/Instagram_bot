@@ -55,6 +55,9 @@ def login(driver, username, password, user_choice, *args):
     if user_choice == 3:
         find_following(*args)
 
+    if user_choice == 4:
+        view_story(*args)
+
 # ----------------------------------------------#
 # Auto like and Auto comment
 def like_and_comment(number=5):
@@ -137,6 +140,22 @@ def find_following(hashtag, number=5):
             pass
 
 
+# Auto View Story
+def view_story(user_number=3):
+    counter = 3
+    while counter < user_number + 3:
+        try:
+            driver.find_element(By.XPATH, f"//html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/section/main/section/div[1]/div[2]/div/div/div/div/ul/li[{counter}]/div/button").click()
+            driver.implicitly_wait(50)
+            sleep(3)
+            driver.find_element(By.XPATH , story_forward_btn).click()
+            driver.implicitly_wait(30)
+            sleep(3)
+            driver.find_element(By.XPATH, "//html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/section/div[3]/button").click()
+            sleep(3)
+            counter += 1
+        except:
+            print("this seen...")
 
 
 
@@ -148,12 +167,8 @@ if __name__ == "__main__":
     **1.Auto Like and Auto Comment
     **2.Auto Follow with Hashtag
     **3.Auto Following with Hashtag
-    **4.
-    **5.
-    **6.
-    **7.
-    **8.
-    **9.Exit form app (END...)
+    **4.Auto View story
+    **0.Exit form app (END...)
     ''')
     print('*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*&*')
 
@@ -203,21 +218,19 @@ if __name__ == "__main__":
         driver.close()
 
    
-   #
+   # View story
     elif user_choice == 4:
-        pass
+        username = USERNAME
+        password = PASSWORD
+        user_number = int(input('Enter User number for view: '))
 
-    elif user_choice == 5:
-        pass
+        driver = webdriver.Firefox(executable_path=PATH)
+        driver.get("https://www.instagram.com")
+        login(driver,username, password, user_choice,user_number)
 
-    elif user_choice == 6:
-        pass
+        sleep(20)
+        driver.close()
 
-    elif user_choice == 7:
-        pass
-
-    elif user_choice == 8:
-        pass
 
     else:
         exit()
